@@ -11,46 +11,83 @@ body {
 
 .player {
     background: rgba(255,255,255,0.1);
-    padding: 20px;
+    padding: 18px;              /* 🔽 reduced from 25 */
     border-radius: 20px;
     text-align: center;
     backdrop-filter: blur(10px);
+    width: 260px; 
+     box-shadow: 0 10px 30px rgba(0,0,0,0.4);              /* slightly smaller */
 }
 
 img {
-    width: 200px;
-    height: 200px;
+    width: 260px;
+    height: 260px;
     border-radius: 15px;
-    margin: 15px 0;
+    margin: 10px 0;
 }
 
 .controls button {
-    padding: 10px 15px;
+    padding: 8px 12px;
     margin: 5px;
-    font-size: 18px;
+    font-size: 25px;
     border: none;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
+     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 .controls button:hover {
     background: rgba(255,255,255,0.2);
+     transform: scale(1.1);
 }
 #progress {
     width: 100%;
-    margin: 15px 0;
+    margin: 10px 0;
 }
 .volume-container {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-top: 10px;
+    justify-content: center;   /* add this */
+    gap: 8px;
 }
 
 .volume-container span {
-    font-size: 20px;
+    
+    font-size: 15px;
 }
 
 #volume {
-    flex: 1;
+    
+    width: 50%;
+   
+}
+h3 {
+    margin: 8px 0;              /* 🔽 less gap */
+}
+
+#progress {
+    margin: 8px 0;              /* 🔽 less gap */
+}
+
+.volume-container {
+    margin-top: 5px;            /* 🔽 reduced */
+}
+img {
+    transition: transform 0.3s ease;
+}
+
+.playing {
+    animation: rotate 5s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+.controls button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255,255,255,0.4);
+}
+#progress {
+    accent-color: #56f85bf1;   /* Spotify green 😎 */
 }

@@ -1,12 +1,13 @@
+ let playBtn = document.querySelector(".controls button:nth-child(2)");
 let songs = [
     {
-        title: "Song 1",
-        src: "song1.mp3",
+        title: "Cinnamon Girl",
+        src: "Cinnamon Girl.mp3",
         cover: "cover1.jpg"
     },
     {
-        title: "Song 2",
-        src: "song2.mp3",
+        title: "Chemtrails Over The Country Club",
+        src: "Chemtrails Over The Country Club.mp3",
         cover: "cover2.jpg"
     }
 ];
@@ -26,8 +27,10 @@ function loadSong() {
 function playPause() {
     if (audio.paused) {
         audio.play();
+        updatePlayUI(true);
     } else {
         audio.pause();
+        updatePlayUI(false);
     }
 }
 
@@ -35,12 +38,14 @@ function nextSong() {
     index = (index + 1) % songs.length;
     loadSong();
     audio.play();
+    updatePlayUI(true);   // 🔥 only this
 }
 
 function prevSong() {
     index = (index - 1 + songs.length) % songs.length;
     loadSong();
     audio.play();
+    updatePlayUI(true);
 }
 let progress = document.getElementById("progress");
 
@@ -56,5 +61,21 @@ let volume = document.getElementById("volume");
 volume.addEventListener("input", () => {
     audio.volume = volume.value;
 });
-audio.addEventListener("ended", nextSong);
+audio.addEventListener("ended", () => {
+    nextSong();
+    
+});
+function updatePlayUI(isPlaying) {
+    let playBtn = document.querySelector(".controls button:nth-child(2)");
+
+    if (isPlaying) {
+        playBtn.innerHTML = "⏸️";
+        cover.classList.add("playing");
+    } else {
+        playBtn.innerHTML = "▶️";
+        cover.classList.remove("playing");
+    }
+}
+audio.addEventListener("pause", () => updatePlayUI(false));
+audio.addEventListener("play", () => updatePlayUI(true));
 loadSong();
