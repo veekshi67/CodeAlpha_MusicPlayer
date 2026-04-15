@@ -2,11 +2,13 @@
 let songs = [
     {
         title: "Cinnamon Girl",
+        artist: "Lana Del Rey",
         src: "Cinnamon Girl.mp3",
         cover: "cover1.jpg"
     },
     {
         title: "Chemtrails Over The Country Club",
+        artist: "Lana Del Rey",
         src: "Chemtrails Over The Country Club.mp3",
         cover: "cover2.jpg"
     }
@@ -16,11 +18,13 @@ let index = 0;
 
 let audio = document.getElementById("audio");
 let title = document.getElementById("title");
+let artist = document.getElementById("artist");
 let cover = document.getElementById("cover");
 
 function loadSong() {
     audio.src = songs[index].src;
     title.innerText = songs[index].title;
+    artist.innerText = songs[index].artist;
     cover.src = songs[index].cover;
 }
 
@@ -76,6 +80,33 @@ function updatePlayUI(isPlaying) {
         cover.classList.remove("playing");
     }
 }
+let timeDisplay = document.getElementById("time");
+
+audio.addEventListener("timeupdate", () => {
+    if (audio.duration) {
+
+        let current = audio.currentTime;
+        let duration = audio.duration;
+
+        let format = (time) => {
+            let min = Math.floor(time / 60);
+            let sec = Math.floor(time % 60);
+            return `${min}:${sec < 10 ? "0"+sec : sec}`;
+        };
+
+        timeDisplay.innerText =
+            format(current) + " / " + format(duration);
+    }
+});
+audio.addEventListener("loadedmetadata", () => {
+    let duration = audio.duration;
+
+    let min = Math.floor(duration / 60);
+    let sec = Math.floor(duration % 60);
+
+    document.getElementById("time").innerText =
+        `0:00 / ${min}:${sec < 10 ? "0"+sec : sec}`;
+});
 audio.addEventListener("pause", () => updatePlayUI(false));
 audio.addEventListener("play", () => updatePlayUI(true));
 loadSong();

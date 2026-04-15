@@ -91,3 +91,12 @@ img {
 #progress {
     accent-color: #56f85bf1;   /* Spotify green 😎 */
 }
+#time {
+    font-size: 14px;
+    margin: 5px 0;
+    opacity: 0.8;
+}
+#artist {
+    font-size: 14px;
+    opacity: 0.7;
+}
